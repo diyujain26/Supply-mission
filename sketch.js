@@ -14,9 +14,12 @@ function preload()
 function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
+
+	engine=Engine.create();
+	world=engine.world;
 	
 
-	packageSprite=createSprite(width/2, 80, 10,10);
+	packageSprite=createSprite(width/2, 600, 10,10);
 	packageSprite.addImage(packageIMG)
 	packageSprite.scale=0.2
 
@@ -24,10 +27,12 @@ function setup() {
 	helicopterSprite.addImage(helicopterIMG)
 	helicopterSprite.scale=0.6
 
-	groundSprite=createSprite(width/2, height-35, width,10);
+	groundSprite=createSprite(width/2, height-35, width,5);
 	groundSprite.shapeColor=color(255)
 
-
+	var packageBody_options = {   restitution: 1.0}
+     packageBody = Bodies.circle(200,100,30,packageBody_options);
+	 
 	engine = Engine.create();
 	world = engine.world;
 
@@ -48,6 +53,7 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background(0);
+  Engine.update(engine);
   packageSprite.x= packageBody.position.x 
   packageSprite.y= packageBody.position.y 
   drawSprites();
@@ -56,10 +62,8 @@ function draw() {
 
 function keyPressed() {
  if (keyCode === DOWN_ARROW) {
+	 Matter.Body.setStatic(packageBody,false)
     // Look at the hints in the document and understand how to make the package body fall only on
     
   }
 }
-
-
-
