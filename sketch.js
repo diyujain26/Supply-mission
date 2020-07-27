@@ -15,10 +15,6 @@ function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
 
-	engine=Engine.create();
-	world=engine.world;
-	
-
 	packageSprite=createSprite(width/2, 600, 10,10);
 	packageSprite.addImage(packageIMG)
 	packageSprite.scale=0.2
@@ -30,7 +26,7 @@ function setup() {
 	groundSprite=createSprite(width/2, height-35, width,5);
 	groundSprite.shapeColor=color(255)
 
-	var packageBody_options = {   restitution: 1.0}
+	var packageBody_options = {   restitution: 0.2}
      packageBody = Bodies.circle(200,100,30,packageBody_options);
 	 
 	engine = Engine.create();
@@ -44,8 +40,7 @@ function setup() {
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 
-
-	Engine.run(engine);
+	 Engine.run(engine);
   
 }
 
