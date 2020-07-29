@@ -1,36 +1,24 @@
-class Box {
+const Engine = Matter.Engine;
+const World= Matter.World;
+const Bodies = Matter.Bodies;
 
-  constructor(x, y, width, height) {
+var engine, world;
+var box1,box2,ground;
 
-    var options = {
+function setup(){
+    var canvas = createCanvas(400,400);
+    engine = Engine.create();
+    world = engine.world;
 
-        'restitution':0.8,
-        'friction':0.3,
-        'density':1.0
+    box1 = new Box(200,300,50,50);
+    box2 = new Box(240,100,50,50);
+    ground = new Ground(200,390,400,20);
+}
 
-    }
-
-    this.body = Bodies.rectangle(x, y, width, height, options);
-
-    this.width = width;
-    this.height = height;
-    
-    World.add(world, this.body);
-
-  }
-
-  display(){
-
-    var pos =this.body.position;
-    var angle = this.body.angle;
-    push();
-    translate(pos.x,pos.y);
-    rotate(angle);
-    rectMode(CENTER);
-    fill(255);
-    rect(0,0, this.width, this.height);
-
-    pop();
-
-  }
-};
+function draw(){
+    background(0);
+    Engine.update(engine);
+    box1.display();
+    box2.display();
+    ground.display();
+}
